@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import decouple import config.Csv 
+from  decouple import config,Csv 
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -52,14 +52,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-MIDDLEWARE_CLASSES = (
-    # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 
-ROOT_URLCONF='tribune.urls'
+ROOT_URLCONF = 'pictures.urls'  #module-mapping btwn URL path expression to python function
 
- 
+# MIDDLEWARE_CLASSES = (
+#     # Simplified static file serving.
+#     # https://warehouse.python.org/project/whitenoise/
+#     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 TEMPLATES = [
     {
@@ -87,18 +86,18 @@ WSGI_APPLICATION = 'pictures.wsgi.application'
 if config('MODE')=="dev":
     DATABASE = {
          'default':{
-        'ENGINE': 'django.db.backends.postgresql_psycopg2'
-        #NAME : os.path.join(BASE_DIR, 'db.sqlite3),
-        'NAME':'',
-        'USER': 'moringa'
-        'PASSWORD': '',
-        'HOST': config(''),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME' : 'insta',
+        'USER': 'moringa',
+        'PASSWORD': '0732442483a',
+        'HOST': config('0732442483a'),
         'PORT': 'http://127.0.1:8000/',
       }
     }
 #production
 else: 
-    DATABASE ={
+    DATABASE ={        
+        #dj_database_url returns a db connection dictionary
         'default':dj_database_url.config(
             default=config('DATABASE_URL')
         )
