@@ -38,29 +38,13 @@
         <p> Category: {{ category.name }} </p>
         {% endfor %}
 
-        <!-- The button used to copy the text -->
-
-        <button type="button" name="button" class="btn btn-info" value="https://emdeegallery.herokuapp.com{{image.gallery_image.url}}" onclick="copylink(this.value)">Copy Image Link</button>
+       
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-      </div>
+      
     </div>
   </div>
 </div>
-<script>
-function copylink(value) {
-    console.log('hi yellow')
-    function handler(event){
-        event.clipboardData.setData('text/plain', value);
-        event.preventDefault();
-        document.removeEventListener('copy', handler, true);
-    }
-    document.addEventListener('copy', handler, true);
-    document.execCommand('copy');
-}
-</script>
+ 
 
 
 {%endfor%}
