@@ -15,15 +15,12 @@ import decouple import config.Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#static files 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-MODE =config("MODE", default="dev")
 SECRET_KEY = '6683)1hs727)h#j7=62bl=28ut!)s+*es4h_pat^n!!*kx)u$9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -35,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'images',
+    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,8 +51,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+MIDDLEWARE_CLASSES = (
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
-ROOT_URLCONF = 'pictures.urls'
+ROOT_URLCONF='tribune.urls'
+
+ 
 
 TEMPLATES = [
     {
@@ -66,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -76,6 +82,7 @@ WSGI_APPLICATION = 'pictures.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+#development
 if config('MODE')=="dev":
     DATABASE = {
          'default':{
@@ -88,7 +95,7 @@ if config('MODE')=="dev":
         'PORT': 'http://127.0.1:8000/',
       }
     }
-
+#production
 else: 
     DATABASE ={
         'default':dj_database_url.config(
