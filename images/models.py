@@ -1,7 +1,5 @@
 from django.db import models
-import datetime as dt
-from django.contrib.auth.models import User
-from tinymce.models import HTMLField
+ 
 # Create your models here.
 class categories(models.Model):
     name=models.CharField(max_length=30)
@@ -17,8 +15,8 @@ class Location(models.Model):
 
 class Image(models.Model):
     name= models.CharField(max_length=50)
-    description = HTMLField()
-    gallery_image = models.ImageField(upload_to='/', blank=True)
+    description = models.TextField()
+    gallery_image = models.ImageField(upload_to='base-images.html', blank=True)
     categories = models.ManyToManyField(categories)
     location = models.ForeignKey(Location)
 

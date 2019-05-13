@@ -18,9 +18,9 @@ def home(request):
   elif 'category' in request.GET and request.GET['category']:
     name = request.GET.get('categories')
     images = Image.view_category(name)
-    return render(request, 'all-images.html', {"name":name,"images":images,"name":name})
+    return render(request, 'base-images.html', {"name":name,"images":images,"name":name})
 
-  return render(request,"all-images.html",{"images":images,"category":category,"location":location})
+  return render(request,"base-images.html",{"images":images,"category":category,"location":location})
 
 
 def search_results(request):
