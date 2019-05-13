@@ -1,7 +1,7 @@
 from django.db import models
  
 # Create your models here.
-class categories(models.Model):
+class Categories(models.Model):
     name=models.CharField(max_length=30)
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Image(models.Model):
     name= models.CharField(max_length=50)
     description = models.TextField()
     gallery_image = models.ImageField(upload_to='base-images/', blank=True)
-    categories = models.ManyToManyField(categories)
+    categories = models.ManyToManyField(Categories)
     location = models.ForeignKey(Location)
 
     @classmethod
