@@ -8,7 +8,7 @@ class ImageTest(TestCase):
     def setUp(self):
         self.nairobi = Location.objects.create(name='Nairobi')
         self.fun = categories.objects.create(name='fun')
-        self.music = categories.objects.create(name='music')
+        self.ent = categories.objects.create(name='ent')
 
         self.drinks = Image.objects.create(
             name='drinks', location=self.nairobi,  description='picture of a drinks')
