@@ -3,11 +3,14 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect #returning re
 from .models import *
 
 # Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to the Moringa Tribune')
+
+
+def base_images(request):
+    images = Image.objects.all()
+    return render(request, 'base-images.html', {"images": images })
 
 def home(request):
-  images = image.objects.all()
+  images = Image.objects.all()
   location = Location.objects.all()
   category = Categories.objects.all()
 
@@ -18,8 +21,7 @@ def home(request):
   elif 'category' in request.GET and request.GET['category']:
     name = request.GET.get('categories')
     images = Image.view_category(name)
-    return render(request, 'base-images.html', {"name":name,"images":images,"name":name})
-
+    # return render(request, 'base-images.html', {"name":name,"images":images,"name":name})
   return render(request,"base-images.html",{"images":images,"category":category,"location":location})
 
 
