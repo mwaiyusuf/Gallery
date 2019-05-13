@@ -16,7 +16,7 @@ class Location(models.Model):
 class Image(models.Model):
     name= models.CharField(max_length=50)
     description = models.TextField()
-    gallery_image = models.ImageField(upload_to='base-images.html', blank=True)
+    gallery_image = models.ImageField(upload_to='base-images/', blank=True)
     categories = models.ManyToManyField(categories)
     location = models.ForeignKey(Location)
 
