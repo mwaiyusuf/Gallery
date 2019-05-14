@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Categories(models.Model):
     name=models.CharField(max_length=30)
-
+#returning a unicode of anny object
     def __str__(self):
         return self.name
 
@@ -29,7 +29,7 @@ class Image(models.Model):
     def search_by_category(cls,search_images):
         images = Image.objects.filter(categories__name__icontains=search_images)
         return images
-
+#it bounds to a class rather than an object
     @classmethod
     def view_location(cls,name):
         location = cls.objects.filter(location=name)
