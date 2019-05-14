@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http  import HttpResponse,Http404,HttpResponseRedirect #returning response to user
-from .models import *
+from .models import Image,Categories,Location
 
 # Create your views here.
 
 
 def base_images(request):
-    images = Image.objects.all()
-    return render(request, 'base-images.html', {"images": images })
+  images = Image.objects.all()
+  return render(request, 'base-images.html', {"images": images, })
 
 def home(request):
   images = Image.objects.all()
@@ -22,7 +22,7 @@ def home(request):
     name = request.GET.get('categories')
     images = Image.view_category(name)
     # return render(request, 'base-images.html', {"name":name,"images":images,"name":name})
-  return render(request,"base-images.html",{"images":images,"category":category,"location":location})
+  return render(request,"base/base-images.html",{"images":images,"category":category,"location":location})
 
 
 def search_results(request):

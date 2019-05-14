@@ -6,15 +6,15 @@
 <br>
 <br>
 <div class="container">
-
+  {% for image in images %}
   <div class="card-columns">
-    {% for image in images %}
+  
     <div class="card border-secondary">
-      <img class="card-img-top" class="img-responsive" src="{{image.gallery_image.url}}" data-target="#extraModal{{image.id}}" data-toggle="modal" size="100px200">
+      <img class="card-img-top" class="img-fluid" src="{{image.gallery_image.url}}"  data-target="#extraModal{{image.id}}" data-toggle="modal" size="100px200" >
     </div>
-    {%endfor%}
+  
   </div>
-
+  {% endfor %}
 </div>
 
 <!-- Large modal -->
@@ -31,7 +31,7 @@
       </div>
 
       <div class="modal-body">
-        <img class="card-img-top" class="img-responsive" src="{{image.gallery_image.url}}" size="100px200">
+        <img class="card-img-top" class="img-fluid" src="{{image.gallery_image.url}}" size="100px200">
         <p>About: {{image.description}}</p>
         <p>Location: {{image.location}}</p>
 
