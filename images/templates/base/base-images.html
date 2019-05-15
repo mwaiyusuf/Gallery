@@ -1,20 +1,26 @@
 {%extends 'base.html'%}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% block content %}
 {{ block.super}}
 
 <br>
 <br>
 <div class="container">
-  {% for image in images %}
-  <div class="card-columns">
+ 
+  <div class="row">
+      {% for image in images %}
+    <div class="col-md-4">
+        <div class="card-columns">
   
-    <div class="card border-secondary">
-      <img class="card-img-top" class="img-fluid" src="{{image.gallery_image.url}}"  data-target="#extraModal{{image.id}}" data-toggle="modal" size="100px200" >
+            <div class="card border-secondary">
+              <img class="card-img-top" class="img-fluid" src="{{image.gallery_image.url}}"  data-target="#extraModal{{image.id}}" data-toggle="modal">
+            </div>
+          
+          </div>
     </div>
-  
-  </div>
-  {% endfor %}
+    {% endfor %}
+</div>
+ 
 </div>
 
 <!-- Large modal -->
@@ -31,18 +37,14 @@
       </div>
 
       <div class="modal-body">
-        <img class="card-img-top" class="img-fluid" src="{{image.gallery_image.url}}" size="100px200">
+        <img class="card-img-top" class="img-fluid" src="{{image.gallery_image.url}}" height="90%" width="80%">
         <p>About: {{image.description}}</p>
         <p>Location: {{image.location}}</p>
 
-        {% for category in image.categories.all %}
+        {% for category in image.categories.all %}           
         <p> Category: {{ category.name }} </p>
 
-        <!-- The text field -->
-        <input type="text" value="" id="myInput">
-
-        <!-- The button used to copy the text -->
-        <button onclick="myFunction()">Copy text</button>
+        <button type="button" name="button" class="btn btn-info" value="https://gallerymo.herokuapp.com{{image.gallery_image.url}}" onclick="copylink(this.value)">Copy Image Address</button>
         {% endfor %}
 
        
@@ -52,24 +54,17 @@
   </div>
 </div>
 <script>
-function myFunction() {
-  /* Get the text field */
-  var copyText = document.getElementById("myInput");
-
-  /* Select the text field */
-  copyText.select();
-
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
-
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
-}
-
-
-
-
-</script>
+  function copylink(value) {
+      console.log('hi yellow')
+      function handler(event){
+          event.clipboardData.setData('text/plain', value);
+          event.preventDefault();
+          document.removeEventListener('copy', handler, true);
+      }
+      document.addEventListener('copy', handler, true);
+      document.execCommand('copy');
+  }
+  </script>
  
 
 
