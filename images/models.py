@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Categories(models.Model):
     name=models.CharField(max_length=30)
-#returning a unicode of anny object
+#returning a unicode of anny object      object 2 string
     def __str__(self):
         return self.name
 
